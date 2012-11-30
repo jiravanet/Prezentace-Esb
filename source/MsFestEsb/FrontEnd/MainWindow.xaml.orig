@@ -29,7 +29,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Front End" Height="350" Width="525">
     <Grid>
-        
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Vertical">
+			<Button Content="Objednávka"
+							Click="Button_Click" />
+		</StackPanel>
+
+		<ListBox x:Name="_items"
+						 Grid.Row="1">
+
+		</ListBox>
+	</Grid>
 </Window>
->>>>>>> initial commit
+>>>>>>> base implementation consumers and messages

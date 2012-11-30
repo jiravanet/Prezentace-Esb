@@ -1,0 +1,20 @@
+<<<<<<< HEAD
+using Messages.BackEnd;
+
+namespace BackEnd.Interfaces
+{
+	public interface IOrderSplitter
+	{
+		ProcessProductRequest[] Split(OrderCreated message);
+	}
+=======
+using Messages.BackEnd;
+
+namespace BackEnd.Interfaces
+{
+	public interface IOrderSplitter
+	{
+		ProcessProductRequest[] Split(OrderCreated message);
+	}
+>>>>>>> base implementation consumers and messages
+}

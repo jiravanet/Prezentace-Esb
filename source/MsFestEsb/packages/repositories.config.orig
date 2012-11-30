@@ -9,5 +9,6 @@
 <repositories>
   <repository path="..\BackEnd\packages.config" />
   <repository path="..\FrontEnd\packages.config" />
->>>>>>> initial commit
+  <repository path="..\Messages\packages.config" />
+>>>>>>> base implementation consumers and messages
 </repositories>

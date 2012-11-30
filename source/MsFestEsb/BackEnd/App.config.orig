@@ -20,8 +20,9 @@
 	<rhino.esb>
 		<bus threadCount="1" numberOfRetries="5" endpoint="msmq://localhost/BackEnd" />
 		<messages>
-			<add name="Messages" endpoint="msmq://localhost/FrontEnd" />
+			<add name="Messages.FrontEnd" endpoint="msmq://localhost/FrontEnd" />
+			<add name="Messages.BackEnd" endpoint="msmq://localhost/BackEnd" />
 		</messages>
 	</rhino.esb>
->>>>>>> initial commit
+>>>>>>> base implementation consumers and messages
 </configuration>

@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+using System;
+
+namespace BackEnd.Interfaces
+{
+	public interface IStore
+	{
+		int BookProduct(Guid orderId, int productId, int pieces, int bookedPieces);
+		void SaveOrderInformation(Guid id, string customerName, DateTime date);
+	}
+=======
+using System;
+
+namespace BackEnd.Interfaces
+{
+	public interface IStore
+	{
+		void BookProduct(Guid orderId, int productId, int pieces);
+		void SaveOrderInformation(Guid id, string customerName, DateTime date);
+	}
+>>>>>>> base implementation consumers and messages
+}

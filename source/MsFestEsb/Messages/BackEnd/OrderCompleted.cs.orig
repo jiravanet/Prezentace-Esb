@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+﻿using System;
+using Rhino.ServiceBus.Sagas;
+
+namespace Messages.BackEnd
+{
+	[Serializable]
+	public class OrderCompleted : BaseMessage, ISagaMessage
+	{
+		public Guid OrderId { get; set; }
+
+		public Guid CorrelationId { get; set; }
+	}
+=======
+﻿using System;
+
+namespace Messages.BackEnd
+{
+	[Serializable]
+	public class OrderCompleted: BaseMessage
+	{
+		public Guid OrderId { get; set; }
+	}
+>>>>>>> base implementation consumers and messages
+}
