@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+﻿namespace BackEnd.Analytics
+{
+	public class AnalyticOrderSet
+	{
+
+		public int ProductCount { get; set; }
+
+		public string CustomerName { get; set; }
+
+	}
+=======
+﻿namespace BackEnd.Analytics
+{
+	public class AnalyticOrderSet
+	{
+
+		public int ProductCount { get; set; }
+
+		public string CustomerName { get; set; }
+
+	}
+>>>>>>> added analytics consumer and display order set
+}

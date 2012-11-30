@@ -61,7 +61,9 @@
     <Compile Include="Helpers\PrepareQueues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FrontEnd\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -128,6 +130,7 @@
     <Compile Include="BackEnd\OrderSet.cs" />
     <Compile Include="BackEnd\OrderSplitted.cs" />
     <Compile Include="BackEnd\OrderState.cs" />
+    <Compile Include="BackEnd\OrderTimeout.cs" />
     <Compile Include="BackEnd\ProcessProductRequest.cs" />
     <Compile Include="BackEnd\ProductAddedOnOrder.cs" />
     <Compile Include="BaseMessage.cs" />
@@ -148,5 +151,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
->>>>>>> base implementation consumers and messages
+>>>>>>> added analytics consumer and display order set
 </Project>

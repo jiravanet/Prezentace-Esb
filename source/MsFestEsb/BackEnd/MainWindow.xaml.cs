@@ -73,6 +73,10 @@ namespace BackEnd
 		{
 			var handler = PropertyChanged;
 			if (handler != null) handler(this, e);
+																													 }
+			                                                   });
 		}
+
+		public ObservableCollection<AnalyticOrderSet> Orders { get; set; } 
 	}
 }

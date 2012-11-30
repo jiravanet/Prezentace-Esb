@@ -212,6 +212,18 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.0.21114\lib\Net40\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.0.21114\lib\Net40\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.0.21114\lib\Net40\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.0.21114\lib\Net40\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -229,9 +241,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Analytics\AnalyticOrderSet.cs" />
+    <Compile Include="Analytics\AnalyticOrderSetConsumer.cs" />
+    <Compile Include="Analytics\AnalyticsSource.cs" />
     <Compile Include="Consumers\OrderCompletedConsumer.cs" />
     <Compile Include="Consumers\OrderSetConsumer.cs" />
+    <Compile Include="Installers\AnalyticsInstaller.cs" />
+    <Compile Include="Installers\RhinoEsbInstaller.cs" />
+    <Compile Include="Installers\ViewsInstaller.cs" />
     <Compile Include="Installers\WorkersInstaller.cs" />
+    <Compile Include="Interfaces\IAnalyticSource.cs" />
     <Compile Include="Interfaces\IOrderCompleter.cs" />
     <Compile Include="Interfaces\IStore.cs" />
     <Compile Include="Consumers\ProcessProductRequestConsumer.cs" />
@@ -295,5 +314,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
->>>>>>> saga complete
+>>>>>>> added analytics consumer and display order set
 </Project>

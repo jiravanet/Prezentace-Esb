@@ -17,7 +17,8 @@ namespace BackEnd.Consumers
 		}
 	}
 =======
-﻿using Messages.BackEnd;
+﻿using System.Diagnostics;
+using Messages.BackEnd;
 using Rhino.ServiceBus;
 
 namespace BackEnd.Consumers
@@ -27,7 +28,8 @@ namespace BackEnd.Consumers
 		public void Consume(OrderCompleted message)
 		{
 			//TODO: do the work needed when order is completed
+			Debug.WriteLine(message.CorrelationId, "OrderCompleted");
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> added analytics consumer and display order set
 }

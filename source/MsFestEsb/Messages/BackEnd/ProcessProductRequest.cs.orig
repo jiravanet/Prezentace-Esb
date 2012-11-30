@@ -29,6 +29,8 @@ namespace Messages.BackEnd
 		public int ProductId { get; set; }
 
 		public int Pieces { get; set; }
+
+		public int AvailablePieces { get; set; }
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> added analytics consumer and display order set
 }

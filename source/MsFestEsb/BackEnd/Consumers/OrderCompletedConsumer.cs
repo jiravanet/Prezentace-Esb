@@ -10,7 +10,7 @@ namespace BackEnd.Consumers
 		public void Consume(OrderCompleted message)
 		{
 			//TODO: do the work needed when order is completed
-			var text = string.Format("{0} {1:HH:mm:ss}", message.CorrelationId, DateTime.Now);
+			Debug.WriteLine(message.CorrelationId, "OrderCompleted");
 
 			Debug.WriteLine(text, "OrderCompleted");
 		}

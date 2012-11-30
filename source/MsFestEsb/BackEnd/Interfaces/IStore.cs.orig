@@ -15,8 +15,8 @@ namespace BackEnd.Interfaces
 {
 	public interface IStore
 	{
-		void BookProduct(Guid orderId, int productId, int pieces);
+		int BookProduct(Guid orderId, int productId, int pieces, int availablePieces);
 		void SaveOrderInformation(Guid id, string customerName, DateTime date);
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> added analytics consumer and display order set
 }

@@ -28,9 +28,13 @@ namespace BackEnd.Workers
 {
 	public class ProductStore: IStore
 	{
-		public void BookProduct(Guid orderId, int productId, int pieces)
+		public int BookProduct(Guid orderId, int productId, int pieces, int availablePieces)
 		{
-			//TODO: save information to data store
+			if (productId == 1)
+			{
+				return ++availablePieces;
+			}
+			return pieces;
 		}
 
 		public void SaveOrderInformation(Guid id, string customerName, DateTime date)
@@ -38,5 +42,5 @@ namespace BackEnd.Workers
 			//TODO: save information to data store
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> added analytics consumer and display order set
 }
