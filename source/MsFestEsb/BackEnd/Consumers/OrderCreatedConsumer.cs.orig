@@ -48,9 +48,9 @@ namespace BackEnd.Consumers
 		public void Consume(OrderCreated message)
 		{
 			var parts = _splitter.Split(message);
-			_bus.Notify(new OrderSplitted(message.Id, parts.Length));
+			_bus.Notify(new OrderSplitted(message.Id, parts.Length) { CorrelationId = message.Id});
 			_bus.Send(parts);
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> saga complete
 }

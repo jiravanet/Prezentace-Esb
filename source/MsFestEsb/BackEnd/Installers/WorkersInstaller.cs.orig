@@ -26,6 +26,8 @@ using BackEnd.Workers;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Rhino.ServiceBus.Internal;
+using Rhino.ServiceBus.Sagas.Persisters;
 
 namespace BackEnd.Installers
 {
@@ -34,11 +36,11 @@ namespace BackEnd.Installers
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
 			container.Register(
+				Component.For(typeof(ISagaPersister<>)).ImplementedBy(typeof(InMemorySagaPersister<>)),
 				Component.For<IStore>().ImplementedBy<ProductStore>().LifestyleSingleton(),
-				Component.For<IOrderSplitter>().ImplementedBy<OrderProcessor>().LifestyleTransient(),
-				Component.For<IOrderCompleter>().ImplementedBy<OrderProcessor>().LifestyleTransient()
+				Component.For<IOrderSplitter, IOrderCompleter>().ImplementedBy<OrderProcessor>().LifestyleTransient()
 				);
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> saga complete
 }

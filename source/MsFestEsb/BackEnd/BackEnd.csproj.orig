@@ -248,7 +248,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Interfaces\IOrderSplitter.cs" />
     <Compile Include="Consumers\OrderCreatedConsumer.cs" />
-    <Compile Include="Consumers\OrderProcessingConsumer.cs" />
+    <Compile Include="Consumers\OrderProcessingSaga.cs" />
     <Compile Include="Installers\ConsumersInstaller.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -295,5 +295,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
->>>>>>> base implementation consumers and messages
+>>>>>>> saga complete
 </Project>

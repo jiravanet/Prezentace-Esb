@@ -51,8 +51,8 @@ namespace BackEnd.Consumers
 		public void Consume(ProcessProductRequest message)
 		{
 			_store.BookProduct(message.OrderId, message.ProductId, message.Pieces);
-			_bus.Send(new ProductAddedOnOrder() { OrderId = message.OrderId});
+			_bus.Send(new ProductAddedOnOrder() { OrderId = message.OrderId, CorrelationId = message.OrderId});
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> saga complete
 }

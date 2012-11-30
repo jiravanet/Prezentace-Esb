@@ -24,11 +24,12 @@ namespace Messages.BackEnd
 	}
 =======
 ﻿using System;
+using Rhino.ServiceBus.Sagas;
 
 namespace Messages.BackEnd
 {
 	[Serializable]
-	public class OrderSplitted: BaseMessage
+	public class OrderSplitted : BaseMessage, ISagaMessage
 	{
 		public int Length { get; set; }
 
@@ -42,6 +43,8 @@ namespace Messages.BackEnd
 			Id = id;
 			Length = length;
 		}
+
+		public Guid CorrelationId { get; set; }
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> saga complete
 }
