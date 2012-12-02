@@ -18,8 +18,8 @@ namespace BackEnd.Consumers
 
 		public void Consume(ProcessProductRequest message)
 		{
-			message.AvailablePieces = _store.BookProduct(message.OrderId, message.ProductId, message.Pieces, message.AvailablePieces);
-			if (message.Pieces == message.AvailablePieces)
+			message.BookedPieces = _store.BookProduct(message.OrderId, message.ProductId, message.Pieces, message.BookedPieces);
+			if (message.Pieces == message.BookedPieces)
 			{
 				_bus.Send(new ProductAddedOnOrder() { OrderId = message.OrderId, CorrelationId = message.OrderId });
 			}

@@ -73,7 +73,10 @@ namespace FrontEnd
 =======
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,6 +88,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Messages.BackEnd;
+using Messages.FrontEnd;
 using Rhino.ServiceBus;
 
 namespace FrontEnd
@@ -113,6 +117,18 @@ namespace FrontEnd
 			_bus.Send(order);
 		}
 
+		private void Button_Click1000(object sender, RoutedEventArgs e)
+		{
+			var interval = Observable.Interval(TimeSpan.FromMilliseconds(200)).Take(100);
+
+			var subscription = interval.SubscribeOn(NewThreadScheduler.Default).
+				Subscribe(_ =>
+				          {
+				          	var order = CreateOrder();
+				          	_bus.Send(order);
+				          });
+		}
+
 		private OrderSet CreateOrder()
 		{
 			var result = new OrderSet();
@@ -126,4 +142,4 @@ namespace FrontEnd
 		}
 	}
 }
->>>>>>> base implementation consumers and messages
+>>>>>>> added reply

@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+﻿using System;
+
+namespace Messages.FrontEnd
+{
+
+	[Serializable]
+	public class ReplyOrderSet: BaseMessage
+	{
+		 
+	}
+=======
+﻿using System;
+
+namespace Messages.FrontEnd
+{
+
+	[Serializable]
+	public class ReplyOrderSet: BaseMessage
+	{
+		 
+	}
+>>>>>>> added reply
+}

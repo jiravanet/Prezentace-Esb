@@ -27,6 +27,7 @@ namespace BackEnd.Consumers
 =======
 ﻿using BackEnd.Interfaces;
 using Messages.BackEnd;
+using Messages.FrontEnd;
 using Rhino.ServiceBus;
 
 namespace BackEnd.Consumers
@@ -46,7 +47,8 @@ namespace BackEnd.Consumers
 		{
 			_store.SaveOrderInformation(message.Id, message.CustomerName, message.Date);
 			_bus.Send(new OrderCreated() {OrderItems = message.OrderItems});
+			_bus.Reply(new ReplyOrderSet());
 		}
 	}
->>>>>>> base implementation consumers and messages
+>>>>>>> added reply
 }

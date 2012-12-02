@@ -11,13 +11,14 @@ namespace BackEnd.Consumers
 		public void Consume(OrderCompleted message)
 		{
 			//TODO: do the work needed when order is completed
-			var text = string.Format("{0} {1:HH:mm:ss}", message.CorrelationId, DateTime.Now);
+			Debug.WriteLine(message.CorrelationId, "OrderCompleted");
 
 			Debug.WriteLine(text, "OrderCompleted");
 		}
 	}
 =======
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Messages.BackEnd;
 using Rhino.ServiceBus;
 
@@ -28,8 +29,10 @@ namespace BackEnd.Consumers
 		public void Consume(OrderCompleted message)
 		{
 			//TODO: do the work needed when order is completed
-			Debug.WriteLine(message.CorrelationId, "OrderCompleted");
+			var text = string.Format("{0} {1:HH:mm:ss}", message.CorrelationId, DateTime.Now);
+
+			Debug.WriteLine(text, "OrderCompleted");
 		}
 	}
->>>>>>> added analytics consumer and display order set
+>>>>>>> added reply
 }

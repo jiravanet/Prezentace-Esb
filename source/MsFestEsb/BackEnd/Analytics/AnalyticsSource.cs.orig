@@ -31,7 +31,7 @@ using BackEnd.Interfaces;
 
 namespace BackEnd.Analytics
 {
-	public class AnalyticsSource: System.Reactive.ObservableBase<AnalyticOrderSet>, IAnalyticSource
+	public class AnalyticsSource: IAnalyticSource
 	{
 		private readonly Subject<AnalyticOrderSet> _subject;
 
@@ -45,10 +45,10 @@ namespace BackEnd.Analytics
 			_subject.OnNext(data);
 		}
 
-		protected override IDisposable SubscribeCore(IObserver<AnalyticOrderSet> observer)
+		public IObservable<AnalyticOrderSet> Subscription
 		{
-			return _subject.Subscribe(observer);
-		}
+			get { return _subject; }
+		} 
 	}
->>>>>>> added analytics consumer and display order set
+>>>>>>> added reply
 }

@@ -21,6 +21,7 @@
 						 Grid.Row="1">
 
 		</ListBox>
+		</ListBox>
 	</Grid>
 </Window>
 =======
@@ -37,6 +38,9 @@
 		<StackPanel Orientation="Vertical">
 			<Button Content="Objednávka"
 							Click="Button_Click" />
+
+			<Button Content="1000 Objednávek"
+							Click="Button_Click1000" />
 		</StackPanel>
 
 		<ListBox x:Name="_items"
@@ -45,4 +49,4 @@
 		</ListBox>
 	</Grid>
 </Window>
->>>>>>> base implementation consumers and messages
+>>>>>>> added reply

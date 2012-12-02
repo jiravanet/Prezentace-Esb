@@ -28,11 +28,11 @@ namespace BackEnd.Workers
 {
 	public class ProductStore: IStore
 	{
-		public int BookProduct(Guid orderId, int productId, int pieces, int availablePieces)
+		public int BookProduct(Guid orderId, int productId, int pieces, int bookedPieces)
 		{
 			if (productId == 1)
 			{
-				return ++availablePieces;
+				return ++bookedPieces;
 			}
 			return pieces;
 		}
@@ -42,5 +42,5 @@ namespace BackEnd.Workers
 			//TODO: save information to data store
 		}
 	}
->>>>>>> added analytics consumer and display order set
+>>>>>>> added reply
 }

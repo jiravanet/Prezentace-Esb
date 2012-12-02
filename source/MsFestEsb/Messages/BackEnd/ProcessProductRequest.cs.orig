@@ -30,7 +30,7 @@ namespace Messages.BackEnd
 
 		public int Pieces { get; set; }
 
-		public int AvailablePieces { get; set; }
+		public int BookedPieces { get; set; }
 	}
->>>>>>> added analytics consumer and display order set
+>>>>>>> added reply
 }

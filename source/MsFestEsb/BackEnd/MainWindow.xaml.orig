@@ -43,7 +43,7 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Orientation="Vertical">
-
+			<TextBlock Text="{Binding TotalCount, ElementName=Window}" />
 		</StackPanel>
 
 		<ListBox ItemsSource="{Binding Orders, ElementName=Window}"
@@ -62,4 +62,4 @@
 		</ListBox>
 	</Grid>
 </Window>
->>>>>>> added analytics consumer and display order set
+>>>>>>> added reply
