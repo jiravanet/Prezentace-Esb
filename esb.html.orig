@@ -99,70 +99,6 @@ pre code {
 				<li>Důležitá charakteristika a součást ESB</li>
 				<li>Její použití by mělo být odstíněno od ostatních komponent</li>
 				<li>Především na ní záleží propustnost a rychlost celého systému</li>
-<<<<<<< HEAD
-=======
-			</ul>
-		</div>
-
-		<div id="Div3" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>.NET Service bus</h2>
-			<ul>
-				<li>NServiceBus</li>
-				<li>MassTransit</li>
-				<li>Rhino Service bus</li>
-				<li>Rebus</li>
-				<li>Simple service bus</li>
-				<li>...</li>
-			</ul>
-		</div>
-
-		<div id="Div4" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Rhino Service bus</h2>
-			<ul>
-				<li>Hostováno samostatně nebo inprocess</li>
-				<li>Využívá MSMQ nebo Rhino queues</li>
-				<li>Open source (github)</li>
-			</ul>
-		</div>
-
-		<div id="Div5" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Systém doručování zpráv</h2>
-			<ul>
-				<li>Publish / Subscribe</li>
-				<li>Request / Reply</li>
-				<li>One way - Notify</li>
-				<li>DelaySend</li>
-			</ul>
-		</div>
-
-		<div id="Div6" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Systém zpracování zpráv</h2>
-			<ul>
-				<li>Konzumenti zpráv implementují rozhraní ConsumerOf&lt;T&gt;</li>
-				<li>OccasionalConsumerOf - pouze pro případy, kdy je explicitně přihlášen k odběru dané zprávy</li>
-				<li>InitiatedBy a Orchestrates - pro speciální případy, kdy využíváme tzv. Sagy</li>
-			</ul>
-		</div>
-
-		<div id="Div7" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Publish / Subscribe</h2>
-			<ul>
-				<li>DEMO</li>
-			</ul>
-		</div>
-
-		<div id="Div8" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Request / Reply</h2>
-			<ul>
-				<li>DEMO</li>
-			</ul>
-		</div>
-
-		<div id="Div9" class="step slide" data-x="-1000" data-y="-1500">
-			<h2>Saga</h2>
-			<ul>
-				<li>DEMO</li>
->>>>>>> prezentace
 			</ul>
 		</div>
 
@@ -228,6 +164,91 @@ pre code {
 			</ul>
 		</div>
 
+<<<<<<< HEAD
+		<div id="Div1" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Service bus architektura</h2>
+			<ul>
+				<li>Modulární a komponentově založená architektura</li>
+				<li>Jednotlivé služby jsou ve své podstatě samostatné celky</li>
+				<li>Dostupnost jednotlivých částí není garantována</li>
+				<li>Zprávy jsou routovány přes message queue (buffer)</li>
+				<li>Měl by umožňovat filtrování, korekce a přesměrování zpráv</li>
+			</ul>
+		</div>
+
+		<div id="Div2" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Message queue</h2>
+			<ul>
+				<li>Důležitá charakteristika a součást ESB</li>
+				<li>Její použití by mělo být odstíněno od ostatních komponent</li>
+				<li>Především na ní záleží propustnost a rychlost celého systému</li>
+			</ul>
+		</div>
+
+		<div id="Div3" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>.NET Service bus</h2>
+			<ul>
+				<li>Service Bus 1.0</li>
+				<li>NServiceBus</li>
+				<li>MassTransit</li>
+				<li>Rhino Service bus</li>
+				<li>Rebus</li>
+				<li>Simple service bus</li>
+				<li>...</li>
+			</ul>
+		</div>
+
+		<div id="Div4" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Rhino Service bus</h2>
+			<ul>
+				<li>Hostováno samostatně nebo inprocess</li>
+				<li>Využívá MSMQ nebo Rhino queues</li>
+				<li>Open source (github)</li>
+			</ul>
+		</div>
+
+		<div id="Div5" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Systém doručování zpráv</h2>
+			<ul>
+				<li>Publish / Subscribe</li>
+				<li>Request / Reply</li>
+				<li>One way - Notify</li>
+				<li>DelaySend</li>
+			</ul>
+		</div>
+
+		<div id="Div6" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Systém zpracování zpráv</h2>
+			<ul>
+				<li>Konzumenti zpráv implementují rozhraní ConsumerOf&lt;T&gt;</li>
+				<li>OccasionalConsumerOf - pouze pro případy, kdy je explicitně přihlášen k odběru dané zprávy</li>
+				<li>InitiatedBy a Orchestrates - pro speciální případy, kdy využíváme tzv. Sagy</li>
+			</ul>
+		</div>
+
+		<div id="Div7" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Publish / Subscribe</h2>
+			<ul>
+				<li>DEMO</li>
+			</ul>
+		</div>
+
+		<div id="Div8" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Request / Reply</h2>
+			<ul>
+				<li>DEMO</li>
+			</ul>
+		</div>
+
+		<div id="Div9" class="step slide" data-x="-1000" data-y="-1500">
+			<h2>Saga</h2>
+			<ul>
+				<li>DEMO</li>
+			</ul>
+		</div>
+
+=======
+>>>>>>> minor updates
 		<div id="Div10" class="step slide" data-x="-1000" data-y="-1500">
 			<h2>Děkuji za pozornost</h2>
 		</div>

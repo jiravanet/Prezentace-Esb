@@ -62,6 +62,7 @@ namespace BackEnd.Consumers
 	}
 =======
 using System;
+using System.Diagnostics;
 using BackEnd.Interfaces;
 using Messages.BackEnd;
 using Rhino.ServiceBus;
@@ -105,6 +106,7 @@ namespace BackEnd.Consumers
 		{
 			//_bus.Send(new );
 			IsCompleted = true;
+			Debug.WriteLine("Order timeout");
 		}
 
 		private void OnAllProductsAdded(OrderCompleted message)
@@ -120,5 +122,5 @@ namespace BackEnd.Consumers
 
 		public OrderState State { get; set; }
 	}
->>>>>>> added analytics consumer and display order set
+>>>>>>> minor updates
 }
