@@ -38,29 +38,6 @@ namespace BackEnd
 
 		public ObservableCollection<AnalyticOrderSet> Orders { get; set; }
 
-		private int _totalCount;
-
-		public int TotalCount
-		{
-			get { return _totalCount; }
-			set
-			{
-				_totalCount = value;
-				OnPropertyChanged(new PropertyChangedEventArgs("TotalCount"));
-			}
-		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		public void OnPropertyChanged(PropertyChangedEventArgs e)
-		{
-			var handler = PropertyChanged;
-			if (handler != null) handler(this, e);
-																													 }
-			                                                   });
-		}
-
-		public ObservableCollection<AnalyticOrderSet> Orders { get; set; }
 
 		private int _totalCount;
 

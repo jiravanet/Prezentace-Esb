@@ -20,6 +20,5 @@
 						 Grid.Row="1">
 
 		</ListBox>
-		</ListBox>
 	</Grid>
 </Window>
