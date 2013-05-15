@@ -46,6 +46,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -65,7 +66,8 @@ namespace FrontEnd
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-			PrepareQueues.Prepare("msmq://localhost/BackEnd", QueueType.Standard);
+		    Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
+			//PrepareQueues.Prepare("msmq://localhost/BackEnd", QueueType.Standard);
 
 			var container = new WindsorContainer();
 			container.Install(FromAssembly.This());
@@ -82,4 +84,4 @@ namespace FrontEnd
 		}
 	}
 }
->>>>>>> base implementation consumers and messages
+>>>>>>> improved version

@@ -8,20 +8,20 @@ namespace BackEnd.Consumers
 
 	public class OrderCreatedConsumer: ConsumerOf<OrderCreated>
 	{
-		private readonly IServiceBus _bus;
-		private readonly IOrderSplitter _splitter;
+		readonly IServiceBus bus;
+		readonly IOrderSplitter splitter;
 
 		public OrderCreatedConsumer(IServiceBus bus, IOrderSplitter splitter)
 		{
-			_bus = bus;
-			_splitter = splitter;
+			this.bus = bus;
+			this.splitter = splitter;
 		}
 
 		public void Consume(OrderCreated message)
 		{
-			var parts = _splitter.Split(message);
-			_bus.Notify(new OrderSplitted(message.Id, parts.Length) { CorrelationId = message.Id});
-			_bus.Send(parts);
+			var parts = splitter.Split(message);
+			bus.Notify(new OrderSplitted(message.Id, parts.Length) { CorrelationId = message.Id});
+			bus.Send(parts);
 		}
 	}
 }

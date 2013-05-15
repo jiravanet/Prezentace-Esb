@@ -8,9 +8,9 @@ namespace FrontEnd.Installers
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.Register(
-				Component.For<MainWindow>()
-				);
+            container.Register(
+                Component.For<MainWindow>()
+                );
 		}
 	}
 }

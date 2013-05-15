@@ -7,25 +7,25 @@ namespace BackEnd.Consumers
 {
 	public class ProcessProductRequestConsumer: ConsumerOf<ProcessProductRequest>
 	{
-		private readonly IServiceBus _bus;
-		private readonly IStore _store;
+		readonly IServiceBus bus;
+		readonly IStore store;
 
 		public ProcessProductRequestConsumer(IServiceBus bus, IStore store)
 		{
-			_bus = bus;
-			_store = store;
+			this.bus = bus;
+			this.store = store;
 		}
 
 		public void Consume(ProcessProductRequest message)
 		{
-			message.BookedPieces = _store.BookProduct(message.OrderId, message.ProductId, message.Pieces, message.BookedPieces);
+			message.BookedPieces = store.BookProduct(message.OrderId, message.ProductId, message.Pieces, message.BookedPieces);
 			if (message.Pieces == message.BookedPieces)
 			{
-				_bus.Send(new ProductAddedOnOrder() { OrderId = message.OrderId, CorrelationId = message.OrderId });
+				bus.Send(new ProductAddedOnOrder() { OrderId = message.OrderId, CorrelationId = message.OrderId });
 			}
 			else
 			{
-				_bus.DelaySend(DateTime.Now.Add(TimeSpan.FromSeconds(30)), message);
+				bus.DelaySend(DateTime.Now.Add(TimeSpan.FromSeconds(30)), message);
 			}
 		}
 	}

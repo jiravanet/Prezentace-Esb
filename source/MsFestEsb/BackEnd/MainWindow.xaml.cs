@@ -14,23 +14,21 @@ namespace BackEnd
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window, INotifyPropertyChanged
+	public partial class MainWindow : INotifyPropertyChanged
 	{
-		private readonly IAnalyticSource _source;
-		private int _id;
+		readonly IAnalyticSource source;
 
-		public MainWindow()
+	    public MainWindow()
 		{
 			Orders = new ObservableCollection<AnalyticOrderSet>();
 			InitializeComponent();
 			TotalCount = 0;
-			_id = Thread.CurrentThread.ManagedThreadId;
 		}
 
 		public MainWindow(IAnalyticSource source): this()
 		{
-			_source = source;
-			_source.Subscription.Buffer(TimeSpan.FromSeconds(10)).ObserveOn(SynchronizationContext.Current).Subscribe(x =>
+			this.source = source;
+			this.source.Subscription.Buffer(TimeSpan.FromSeconds(10)).ObserveOnDispatcher().Subscribe(x =>
 			                                                   {
 			                                                       Orders.Clear();
 			                                                       x.ToList().ForEach(Orders.Add);

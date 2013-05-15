@@ -13,20 +13,20 @@ namespace BackEnd.Consumers
 		Orchestrates<ProductAddedOnOrder>,
 		Orchestrates<OrderTimeout>
 	{
-		private readonly IServiceBus _bus;
-		private readonly IOrderCompleter _completer;
+		readonly IServiceBus bus;
+		readonly IOrderCompleter completer;
 
 		public OrderProcessingSaga(IServiceBus bus, IOrderCompleter completer)
 		{
-			_bus = bus;
-			_completer = completer;
+			this.bus = bus;
+			this.completer = completer;
 			State = new OrderState();
 		}
 
 		public void Consume(OrderSplitted message)
 		{
 			State.Items = message.Length;
-			_bus.DelaySend(DateTime.Now.Add(TimeSpan.FromSeconds(50)), new OrderTimeout() { CorrelationId = message.CorrelationId, OrderId = message.CorrelationId });
+			bus.DelaySend(DateTime.Now.Add(TimeSpan.FromSeconds(50)), new OrderTimeout() { CorrelationId = message.CorrelationId, OrderId = message.CorrelationId });
 		}
 
 		public void Consume(ProductAddedOnOrder message)
@@ -34,14 +34,13 @@ namespace BackEnd.Consumers
 			State.AddProduct(message);
 			if (State.IsComplete)
 			{
-				OnAllProductsAdded(_completer.Complete(State.Products));
+				OnAllProductsAdded(completer.Complete(State.Products));
 			}
 
 		}
 
 		public void Consume(OrderTimeout message)
 		{
-			//_bus.Send(new );
 			IsCompleted = true;
 			Debug.WriteLine("Order timeout");
 		}
@@ -49,7 +48,7 @@ namespace BackEnd.Consumers
 		private void OnAllProductsAdded(OrderCompleted message)
 		{
 			message.CorrelationId = Id;
-			_bus.Send(message);
+			bus.Send(message);
 			IsCompleted = true;
 		}
 

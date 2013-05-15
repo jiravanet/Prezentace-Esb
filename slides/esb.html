@@ -1,0 +1,348 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="nobackground">
+    <article class="flexbox vcenter">
+      <img src="img/servicebus_intro.jpg">
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Agenda</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Co je Service bus</li>
+		<li>Service bus architectura</li>
+        <li>Message queue</li>
+        <li>Systém doručování zpráv</li>
+		<li>.NET Service bus</li>
+		<li>Rhino service bus</li>
+        <li>Systém zpracování zpráv</li>
+        <li>DEMO</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Co je Service bus</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Je část architektury systému - model, použitý pro návrh a implementaci komunikace a interakce mezi jednotlivými jeho částmi</li>
+        <li>Představuje koncept pro popis implementace volně svázaných komponent</li>
+        <li>Primární určení je v integraci heterogenních a komplexních systémů</li>
+          <li>Umožňuje implementaci SOA, usnadňuje komunikace pomocí zpráv mezi volně svázanými komponentami z jednoho nebo více systémů</li>
+      </ul>
+    </article>
+    <aside class="note">
+      <section>
+        <ul>
+            <li>Enterprise service bus umožňuje implementaci SOA, která ulehčuje komunikace pomocí zasílání zpráv mezi volně svázanými komponentami z jednoho nebo více systémů</li>
+            <li>Komponenty jsou volně svázány tak, že zdroj zprávy neví nic o tom, kam se daná zpráva dostane a kým je zpracována</li>
+            <li>Různé komponenty jsou však úzce svázány ke kontraktu (zprávě)</li>
+            <li>Použitím message-oriented systému jako je service bus je zde jen nízký stupeň dočasného svázání, protože doručení a zpracování zpráv je dokončeno asynchronně</li>
+        </ul>
+      </section>
+    </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Service bus architektura</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Modulární a komponentově založená architektura</li>
+	    <li>Jednotlivé služby jsou ve své podstatě samostatné celky</li>
+		<li>Dostupnost jednotlivých částí není garantována</li>
+		<li>Zprávy jsou routovány přes message queue (buffer)</li>
+		<li>Měl by umožňovat filtrování, korekce a přesměrování zpráv</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Service bus architektura - typy zpráv</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Zprávy typu <b>Command</b> - co udělat</li>
+	    <li>Zprávy typu <b>Event</b> - na co reagovat</li>
+		<li>Zprávy typu <b>Document</b> - potřebuji data</li>
+      </ul>
+    </article>
+    <aside class="note">
+        <ul>
+            <li><b>Command</b> říká jinému systému, co má udělat. Typ zprávy typu Command by měl patřit povětšinou jen jednomu endpointu (konzumentovi). Zpráva typu Command by také měla zfailovat v případě, že zde nebude žádný přihlášený konzument k odběru této zprávy</li>
+            <li><b>Event</b> představuje typ zprávy, která je notifikační. Každá komponenta, která je přihlášena k odběru zprávy může tuto zprávu obdržet a reagovat na ni. Pokud nebude existovat žádný subscriber pro tento typ zprávy, její publikování by nemělo zhavarovat.</li>
+            <li><b>Document</b> je typ zprávy, která představuje poslání dat. Stejně jako v případě Event, také v tomto případě nemusí existovat konzument, byť bychom asi neměli posílat jen tak data.</li>
+        </ul>
+    </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Proč použít Service bus</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>izolace úkolů a jejich oddělení</li>
+        <li>oddělený vývoj a verzování</li>
+      </ul>
+      <ul class="build">
+          <li><b>Příklad evaluace uživatele</b> - synchronně</li>
+          <li>zkontroluj, zda je uživatel v registru</li>
+          <li>založ uživatele jako klienta</li>
+          <li>informuj uživatele o poskytnutí služby</li>
+      </ul>
+    </article>
+      <aside class="note">
+          <p>Když je toto uděláno v synchronním režimu, uživatel zmáčkne SUBMIT tlačítko a čeká. Představte si situaci, že některý z registrů nedostupný, nebo třeba mail server, který rozesílá notifikační zprávu je pomalý. V takovém případě uživatele nebude možné založit.</p>
+      </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Proč použít Service bus</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+          <li><b>Příklad evaluace uživatele</b></li>
+          <li>Použij <b>evaluační service</b> - zpracovává EvaluateUserCommand
+              <ul>
+                  <li>zkontroluje, zda je uživatel v registru
+                      <ul>
+                          <li>pokud je v registru, tak posílá zprávu SendEmailCommand s informací, že mu není možné poskytnout služby</li>
+                          <li>pokud není v registru, tak posílá zprávu SendEmailCommand s informací, že mu je možné poskytnout služby a zároveň posílá zprávu UserApprovedEvent</li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>Použij <b>email service</b> - zpracovává SendEmailCommand
+              <ul>
+                  <li>odesílá email, pokud je server nedostupný, tak opakuje požadavek dokud se odeslání nepodaří</li>
+              </ul>
+          </li>
+          <li>Použij <b>core service</b> - zpracovává UserApprovedEvent
+              <ul>
+                  <li>založí klienta a zpřístupní mu požadované služby</li>
+              </ul>
+          </li>
+      </ul>
+    </article>
+      <aside class="note">
+          <p>Můžeme tento proces změnit a použít Service bus a potom náš předchozí scénář může vypadat následovně. Posbíráme informace o uživateli tak jako v předchozím kroku, ale místo celkového zpracování odešleme zprávu EvaluateUserCommand</p>
+          <p>Každá komponenta tak může být vyvíjena a nasazena samostatně. Zastavení některé ze služeb, třeba kvůli deploymentu nemusí znamenat zastavení celého procesu, protože queue dále přijímá další zprávy.</p>
+      </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Kde nepoužít Service bus</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+          <li>Dotazování se na data</li>
+          <li>Hromadné importy dat a transformace</li>
+      </ul>
+    </article>
+    <aside class="note">
+        <ul>
+            <li>Pokud je zde něco, kdy bychom neměli použít Service bus, pak je to určitě při požadavku na dotazování se na data. Service bus je uzpůsoben tomu, aby nám pomohl se zpracováním příkazu co udělat (Command) nebo reagoval na nějaké události (Event) a na základě nich se něco provedlo. V ojedinělých případech pak můžeme použít pro přenos dat (Document message). Při dotazování se na data, však většinou požadujeme okamžitou a jasnou odezvu, což nám Service bus nemůže garantovat.</li>
+            <li>Je však celkem validním požadavkem, pokud zašleme nějaký příkaz pro provedení nějaké kalkulace. Tento výsledek se uloží do datového úložiště a notifikujeme odesílatele o tom, že data jsou připravena k vyzvednutí. Což je maličko odlišná strategie, než přímé vyžádání si dat, takto získaná data pak můžeme získat přímo.</li>
+        </ul>
+    </aside>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Message queue</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Důležitá charakteristika a součást ESB</li>
+	    <li>Její použití by mělo být odstíněno od ostatních komponent</li>
+		<li>Především na ní záleží propustnost a rychlost celého systému</li>
+      </ul>
+    </article>
+    <aside class="note">
+        <ul>
+            <li>MSMQ - představuje message oriented middleware technologii pro distribuované aplikace</li>
+            <li>Mezi hlavní vlastnosti patří
+                <ul>
+                    <li>garantování doručení zpráv</li>
+                    <li>routování zpráv</li>
+                    <li>bezpečnost - zprávy podporují autentikace a enkrypci</li>
+                    <li>transakčnost - umožňuje zabalit několik zpráv do transakce a tyto zprávy potom doručit jako celek nebo nedoručit vůbec</li>
+                </ul>
+            </li>
+            <li>rozlišujeme mezi privátními a public queue</li>
+            <li>různé typy queue - systémové, journal (uchovává kopie zpráv), dead-letter (uchovává nedoručitelné zprávy nebo zprávy, které expirují), transactional dead-letter (uchovává zprávy, které nemohli být doručeny v transakci)</li>
+        </ul>
+    </aside>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Systém doručování zpráv</h2>
+    </hgroup>
+    <article>
+        <ul>
+            <li>Publish / Subscribe</li>
+            <li>Request / Reply</li>
+			<li>One way - Notify</li>
+			<li>DelaySend</li>
+        </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Systém doručování zpráv - publish / subscribe</h2>
+    </hgroup>
+    <article>
+        <ul>
+            <li>Publishers - odesílatelé zpráv neoslovují přímo jejich příjemce, ale využívají Service bus a nevědí tak nic o příjemci zprávy</li>
+            <li>Subscribers - přihlašují se k odběru konkrétních zpráv a neví, zda existuje nějaký Publisher</li>
+        </ul>
+    </article>
+    <aside class="note">
+        <ul>
+            <li>Výhody jsou <b>loose coupling</b>, <b>Scalability</b> (škálovatelnost) a rozšiřitelnost</li>
+            <li>Nevýhody potom vycházejí z výhod, kdy je oddělen Pub a Sub, což může mít za následek, že zpráva nebude doručena včas, nebo že se Subscriber bude tvářit, že zprávy přijímá a přitom tomu tak nebude (nedokáže se odhlásit)</li>
+        </ul>
+    </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Systém doručování zpráv - request / reply</h2>
+    </hgroup>
+    <article>
+        <ul>
+            <li>Requestor zasílá zprávu a replier zprávu přijme, zpracuje a pošle odpověď</li>
+        </ul>
+    </article>
+    <aside class="note">
+        <ul>
+            <li>Toto chování se může zdát, že je založené na synchronním zpracování, ale nemusí tomu tak být a response může být zaslána kdykoliv v neznámém budoucím čase. Potom můžeme hovořit o tom, že se jedná o komunikaci sync over async.</li>
+        </ul>
+    </aside>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>.NET Service bus</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Service Bus 1.0</li>
+		<li>NServiceBus</li>
+		<li>MassTransit</li>
+		<li>Rhino Service bus</li>
+		<li>Rebus</li>
+		<li>Simple service bus</li>
+		<li>...</li>
+      </ul>
+    </article>
+    <aside class="note">
+        <p>Neúplný seznam implementací Service bus, které jsou napsány pomocí .NET jazyků.</p>
+        <ul>
+            <li>Service Bus 1.0 - existuje jak pro Windows Azure, tak také pro OnPremise řešení. Základem je SQL Server</li>
+		    <li>NServiceBus - komerční a asi nejznámější Service bus v .NET - jako transport využívá MSMQ, RabbitMQ, Apache ActiveMQ nebo SQL Server</li>
+		    <li>MassTransit - volně dostupný Service bus, který pro transport zpráv využívá MSMQ nebo RabbitMQ</li>
+		    <li>Rhino Service bus - taktéž volně dostupný Service bus, který může běže také jako in-process řešení, pro transport využívá MSMQ nebo Rhino queue</li>
+      </ul>
+    </aside>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Rhino Service bus</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Hostováno samostatně nebo inprocess</li>
+		<li>Využívá MSMQ nebo Rhino queues</li>
+		<li>Open source (github)</li>
+      </ul>
+    </article>
+    <aside class="note">
+        <p>Toto řešení jsme zvolili ve firmě a to zejména z důvodu snadného deploymentu, hostujeme inprocess, a konfigurace. Využíváme transportu přes MSMQ a veškerá konfigurace a setup jednotlivých částí je pomocí Castle Windsor.</p>
+    </aside>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Systém zpracování zpráv</h2>
+    </hgroup>
+    <article>
+	    <ul>
+		    <li>Konzumenti zpráv implementují rozhraní ConsumerOf&lt;T&gt;</li>
+		    <li>OccasionalConsumerOf - pouze pro případy, kdy je explicitně přihlášen k odběru dané zprávy</li>
+		    <li>InitiatedBy a Orchestrates - pro speciální případy, kdy využíváme tzv. Sagy</li>
+	    </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>DEMO</h2>
+    </hgroup>
+    <article class="vcenter">
+        <img src="img/order.jpg" />
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <hgroup class="auto-fadein">
+      <h2>Otázky ??? a Odpovědi</h2>
+    </hgroup>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+  
+
+  <slide class="segue dark nobackground">
+    <hgroup class="auto-fadein">
+      <h2>Děkuji za pozornost</h2>
+    </hgroup>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+</body>
+</html>

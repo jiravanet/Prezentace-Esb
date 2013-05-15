@@ -21,7 +21,7 @@ namespace BackEnd
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
-			PrepareQueues.Prepare("msmq://localhost/BackEnd", QueueType.Standard);
+			//PrepareQueues.Prepare("msmq://localhost/BackEnd", QueueType.Standard);
 
 			var container = new WindsorContainer();
 			container.Install(FromAssembly.This());

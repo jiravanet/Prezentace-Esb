@@ -6,21 +6,21 @@ namespace BackEnd.Analytics
 {
 	public class AnalyticsSource: IAnalyticSource
 	{
-		private readonly Subject<AnalyticOrderSet> _subject;
+		readonly Subject<AnalyticOrderSet> subject;
 
 		public AnalyticsSource()
 		{
-			_subject = new Subject<AnalyticOrderSet>();
+			subject = new Subject<AnalyticOrderSet>();
 		}
 
 		public void Add(AnalyticOrderSet data)
 		{
-			_subject.OnNext(data);
+			subject.OnNext(data);
 		}
 
 		public IObservable<AnalyticOrderSet> Subscription
 		{
-			get { return _subject; }
+			get { return subject; }
 		} 
 	}
 }
